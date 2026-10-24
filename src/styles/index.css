@@ -1,0 +1,150 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --ink: #12343b;
+  --ink-soft: #4d6a70;
+  --ink-faint: #8aa0a4;
+  --bg: #e9eff0;
+  --surface: #ffffff;
+  --line: #d5e0e2;
+  --teal: #0f8b8d;
+  --teal-dark: #0a6b6d;
+  --teal-tint: #dcf1f1;
+  --amber: #f4b942;
+  --coral: #e4572e;
+  --coral-tint: #fde8e1;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(18, 52, 59, 0.06), 0 8px 24px rgba(18, 52, 59, 0.07);
+  --font-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 1.15; }
+p { margin: 0; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+
+:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ---------- Layout shell ---------- */
+.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+.app-main { flex: 1; width: 100%; max-width: 1120px; margin: 0 auto; padding: 32px 20px 48px; }
+.app-footer { text-align: center; padding: 20px; font-size: 0.85rem; color: var(--ink-soft); }
+
+/* ---------- Navbar ---------- */
+.navbar { background: var(--ink); position: sticky; top: 0; z-index: 20; }
+.navbar__inner {
+  max-width: 1120px; margin: 0 auto; padding: 12px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand__mark {
+  width: 34px; height: 34px; border-radius: 10px; background: var(--amber);
+  color: var(--ink); display: grid; place-items: center;
+}
+.brand__name { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: #fff; }
+
+.tabs { display: flex; gap: 4px; background: rgba(255, 255, 255, 0.08); padding: 4px; border-radius: 999px; }
+.tab {
+  display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent;
+  color: #bcd3d6; padding: 8px 18px; border-radius: 999px; font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+.tab:hover { color: #fff; }
+.tab--active { background: #fff; color: var(--ink); }
+.tab--active:hover { color: var(--ink); }
+
+/* ---------- Shared UI ---------- */
+.panel {
+  background: var(--surface); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow); padding: 32px; max-width: 760px; margin: 0 auto;
+}
+.panel__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.panel__head--tight { margin-bottom: 16px; }
+.panel__title { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+.panel__sub { color: var(--ink-soft); margin-top: 4px; }
+
+.input {
+  width: 100%; padding: 12px 14px; border: 1.5px solid var(--line);
+  border-radius: var(--radius-md); background: #fff; transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input::placeholder { color: var(--ink-faint); }
+.input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-tint); }
+.input--area { resize: vertical; min-height: 120px; line-height: 1.5; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 0; border-radius: var(--radius-md); padding: 12px 20px; font-weight: 600;
+  transition: background 0.15s, transform 0.1s, opacity 0.15s;
+}
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn--primary { background: var(--teal); color: #fff; }
+.btn--primary:hover:not(:disabled) { background: var(--teal-dark); }
+.btn--ghost { background: transparent; color: var(--ink-soft); padding: 8px 14px; }
+.btn--ghost:hover { background: var(--bg); color: var(--ink); }
+
+.icon-btn {
+  width: 34px; height: 34px; display: inline-grid; place-items: center; border: 0;
+  border-radius: 10px; background: transparent; color: var(--ink-soft);
+  transition: background 0.15s, color 0.15s;
+}
+.icon-btn:hover { background: var(--bg); color: var(--ink); }
+.icon-btn--danger:hover { background: var(--coral-tint); color: var(--coral); }
+.icon-btn--ok { background: var(--teal-tint); color: var(--teal-dark); }
+.icon-btn--ok:hover { background: var(--teal); color: #fff; }
+
+.chip {
+  display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px;
+  font-size: 0.82rem; font-weight: 600; background: var(--bg); color: var(--ink-soft);
+  border: 1.5px solid transparent;
+}
+
+/* Category colours (shared by chips & cards) */
+[data-category="Personal"] { --cat-bg: #ffe3d8; --cat-fg: #a8391a; }
+[data-category="Work"]     { --cat-bg: #d9eaff; --cat-fg: #1f5aa6; }
+[data-category="Study"]    { --cat-bg: #dcf3e0; --cat-fg: #26703a; }
+[data-category="Ideas"]    { --cat-bg: #fff0bd; --cat-fg: #7a5a00; }
+.chip[data-category] { background: var(--cat-bg); color: var(--cat-fg); }
+.chip[data-category="All"] { background: var(--bg); color: var(--ink-soft); }
+
+/* ---------- Empty state ---------- */
+.empty { text-align: center; padding: 48px 16px; color: var(--ink-soft); }
+.empty h3 { color: var(--ink); font-size: 1.3rem; margin-bottom: 6px; }
+.empty__art { display: flex; justify-content: center; gap: 6px; margin-bottom: 18px; }
+.empty__art span { width: 28px; height: 36px; border-radius: 8px; background: var(--teal-tint); }
+.empty__art span:nth-child(2) { background: var(--amber); transform: translateY(-8px); }
+.empty__art span:nth-child(3) { background: var(--line); }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 640px) {
+  .app-main { padding: 20px 14px 36px; }
+  .panel { padding: 22px 16px; border-radius: 16px; }
+  .panel__title { font-size: 1.6rem; }
+  .brand__name { display: none; }
+  .navbar__inner { justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
